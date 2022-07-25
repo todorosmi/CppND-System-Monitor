@@ -26,6 +26,7 @@ Processor& System::Cpu() {
 // TODO: Return a container composed of the system's processes
 vector<Process>& System::Processes() { 
     vector<int> processIDs = LinuxParser::Pids();
+    processes_.clear();
     for(int i = 0; i < processIDs.size(); i++){
         Process processTemp;
         processTemp.Pid(processIDs[i]);
@@ -48,6 +49,7 @@ vector<Process>& System::Processes() {
             }
         }
     }
+
     return processes_; 
 }
 
