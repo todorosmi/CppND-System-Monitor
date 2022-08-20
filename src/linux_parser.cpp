@@ -81,7 +81,10 @@ float LinuxParser::MemoryUtilization() {
     std::istringstream linestream2(line2);
     linestream2 >> key >> freeMem >> unit;
   }
-  return (totalMem-freeMem)/totalMem;
+  if((float)totalMem > 0){
+    return ((float)totalMem-(float)freeMem)/(float)totalMem;
+  }
+  return 0;
 }
 
 // TODO: Read and return the system uptime
@@ -123,7 +126,7 @@ float LinuxParser::CpuUtilization() {
         std::istringstream linestream(line);
         linestream >> cpu >> user >> nice >> system >> idle >> iowait >> irq >> softirq >> steal >> guest >> guest_nice;
     }
-    cpuUtalization = (user+nice+system)/(user+nice+system+idle);
+    cpuUtalization = ((float)user+(float)nice+(float)system)/((float)user+(float)nice+(float)system+(float)idle);
     return cpuUtalization; 
  }
 
@@ -216,7 +219,7 @@ string LinuxParser::Ram(int pid) {
 string LinuxParser::Uid(int pid) { 
   std::string line, key, rest;
   std::ostringstream ostream;
-  int value, uid;
+  int value;
   std::ifstream stream(kProcDirectory + '/' + to_string(pid) + kStatusFilename);
     if (stream.is_open()) {
       while (std::getline(stream, line)) {

@@ -27,7 +27,7 @@ Processor& System::Cpu() {
 vector<Process>& System::Processes() { 
     vector<int> processIDs = LinuxParser::Pids();
     processes_.clear();
-    for(int i = 0; i < processIDs.size(); i++){
+    for(long unsigned int i = 0; i < processIDs.size(); i++){
         Process processTemp;
         processTemp.Pid(processIDs[i]);
         processTemp.User();
@@ -40,8 +40,8 @@ vector<Process>& System::Processes() {
 
     Process processSwitch;
 
-    for(int i = 0; i < processes_.size()-1; i++){
-        for(int j = 1; j < processes_.size(); j++){
+    for(long unsigned int i = 0; i < processes_.size()-1; i++){
+        for(long unsigned int j = 1; j < processes_.size(); j++){
             if(processes_[i]<processes_[j]){
                 processSwitch = processes_[i];
                 processes_[i] = processes_[j];

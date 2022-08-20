@@ -55,6 +55,8 @@ bool Process::operator<(Process const& a[[maybe_unused]]) const {
     
     if(this->cpUtalization_>a.cpUtalization_){
         return true;
-    }     
+    }  
+    
+    return false;
 
 }
