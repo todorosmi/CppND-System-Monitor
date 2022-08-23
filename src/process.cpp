@@ -19,8 +19,8 @@ float Process::CpuUtilization() {
     std::vector<long> cpuTimes = LinuxParser::CpuUtilization(this->pid_);
     long Hertz = sysconf(_SC_CLK_TCK);
     long totalTime = cpuTimes[13] + cpuTimes[14];
-    long seconds = cpuTimes[18] - cpuTimes[21]/Hertz;
-    this->cpUtalization_ = totalTime/Hertz/seconds*100;
+    long seconds = cpuTimes[18] - cpuTimes[22]/Hertz;
+    this->cpUtalization_ = totalTime/Hertz/seconds;
     return this->cpUtalization_;
 }
     
@@ -45,7 +45,7 @@ string Process::User() {
 
 // TODO: Return the age of this process (in seconds)
 long int Process::UpTime() { 
-    this->upTime_ = LinuxParser::UpTime(pid_);
+    this->upTime_ = LinuxParser::UpTime() - LinuxParser::UpTime(pid_);
     return this->upTime_; 
 }
 

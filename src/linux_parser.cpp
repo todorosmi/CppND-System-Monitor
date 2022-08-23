@@ -206,7 +206,7 @@ string LinuxParser::Ram(int pid) {
         std::istringstream linestream(line);
         while (linestream >> key >> value >> unit) {
           if (key == "VmSize:") {
-            ostream << value/sysconf(_SC_CLK_TCK);
+            ostream << value/1024;
           }
         }
       }
