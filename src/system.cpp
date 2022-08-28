@@ -37,18 +37,7 @@ vector<Process>& System::Processes() {
         processTemp.UpTime();
         processes_.push_back(processTemp);
     }
-
-    Process processSwitch;
-
-    for(long unsigned int i = 0; i < processes_.size()-1; i++){
-        for(long unsigned int j = 1; j < processes_.size(); j++){
-            if(processes_[i]<processes_[j]){
-                processSwitch = processes_[i];
-                processes_[i] = processes_[j];
-                processes_[j] = processSwitch;
-            }
-        }
-    }
+    std::sort(processes_.rbegin(), processes_.rend());
 
     return processes_; 
 }

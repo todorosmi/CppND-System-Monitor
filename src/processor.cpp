@@ -3,6 +3,8 @@
 
 // TODO: Return the aggregate CPU utilization
 float Processor::Utilization() { 
-    utilization_ = LinuxParser::CpuUtilization();
-    return utilization_;
+  float totalTime = LinuxParser::Jiffies();
+  float activeTime = LinuxParser::ActiveJiffies() ;
+  float result = 1.0 * (activeTime/totalTime);
+  return result;
  }
